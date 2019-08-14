@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
 const Form = props => {
-  const [person, setPerson] = useState({ name: '', email: '', role: '' });
-  const { setPeople } = props;
+  const { submitPerson, initialPerson } = props;
+  const [person, setPerson] = useState(
+    initialPerson || { name: '', email: '', role: '' }
+  );
 
   const handleChange = e => {
     setPerson({ ...person, [e.target.name]: e.target.value });
@@ -10,7 +12,7 @@ const Form = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setPeople(people => [...people, person]);
+    submitPerson(person);
     setPerson({ name: '', email: '', role: '' });
   };
 
